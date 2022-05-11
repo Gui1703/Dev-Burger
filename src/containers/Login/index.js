@@ -20,7 +20,7 @@ import {
 } from './styles'
 
 function Login() {
-  const { putUserData, userData } = useUser()
+  const { putUserData } = useUser()
 
   const schema = yup
     .object({
@@ -56,7 +56,6 @@ function Login() {
       }
     )
     putUserData(data)
-    console.log(userData)
   }
 
   return (
