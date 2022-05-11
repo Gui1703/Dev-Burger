@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import LoginImg from '../../assets/login-image.svg'
 import Logo from '../../assets/logo.svg'
 import Button from '../../components/Button'
+import { useUser } from '../../hooks/UserContext'
 import api from '../../services/api'
 import {
   LoginImage,
@@ -19,6 +20,8 @@ import {
 } from './styles'
 
 function Login() {
+  const { putUserData, userData } = useUser()
+
   const schema = yup
     .object({
       email: yup
@@ -41,7 +44,7 @@ function Login() {
   })
 
   const onSubmit = async clientData => {
-    const response = await toast.promise(
+    const { data } = await toast.promise(
       api.post('sessions', {
         email: clientData.email,
         password: clientData.password
@@ -52,7 +55,8 @@ function Login() {
         error: 'Verifique seus dados'
       }
     )
-    console.log(response.data)
+    putUserData(data)
+    console.log(userData)
   }
 
   return (
