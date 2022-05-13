@@ -12,7 +12,6 @@ function CategoryCarousel() {
     async function loadCategories() {
       const { data } = await api.get('categories')
 
-      console.log(data)
       setCategories(data)
     }
 
@@ -39,7 +38,7 @@ function CategoryCarousel() {
         {categories &&
           categories.map(category => (
             <ContainerItems key={category.id}>
-              <Image src={category.url} alt="foto da categoria" />
+              <Image src={category.url} alt="category photo" />
               <Button>{category.name}</Button>
             </ContainerItems>
           ))}
