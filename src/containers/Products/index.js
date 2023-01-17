@@ -14,6 +14,7 @@ import {
 function Products() {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
   const [activeCategory, setActiveCategory] = useState(0)
 
   useEffect(() => {
@@ -28,13 +29,20 @@ function Products() {
     async function loadProducts() {
       const { data } = await api.get('products')
 
-      console.log(data)
       setProducts(data)
     }
 
     loadProducts()
     loadCategories()
   }, [])
+
+  useEffect(() => {
+    if (activeCategory === 0) return setFilteredProducts(products)
+    const newFilteredProducts = products.filter(
+      product => product.category_id === activeCategory
+    )
+    setFilteredProducts(newFilteredProducts)
+  }, [activeCategory, products])
 
   return (
     <Container>
@@ -59,8 +67,8 @@ function Products() {
       </CategoriesMenu>
 
       <ProductsContainer>
-        {products &&
-          products.map(product => (
+        {filteredProducts &&
+          filteredProducts.map(product => (
             <CardProduct key={product.id} product={product} />
           ))}
       </ProductsContainer>
