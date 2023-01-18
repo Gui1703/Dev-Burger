@@ -34,4 +34,6 @@ export const ProductsContainer = styled.div`
   gap: 20px;
   padding: 45px;
   justify-items: center;
+  margin: 0 auto;
+  max-width: 1300px;
 `
