@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import ProductLogo from '../../assets/product-logo.svg'
-import CardProduct from '../../components/CardProduct'
+import { CardProduct } from '../../components'
 import api from '../../services/api'
 import {
   CategoriesMenu,
@@ -11,7 +11,7 @@ import {
   ProductsContainer
 } from './styles'
 
-function Products() {
+export function Products() {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
@@ -75,5 +75,3 @@ function Products() {
     </Container>
   )
 }
-
-export default Products

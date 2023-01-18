@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Button } from '../'
 import formatCurrency from '../../utils/formatCurrency'
-import Button from '../Button'
 import { Container, Image, ProductName, ProductPrice } from './style'
 
-export default function CardProduct({ product }) {
+export function CardProduct({ product }) {
   return (
     <Container>
       <Image src={product.url} />
