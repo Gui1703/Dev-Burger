@@ -2,10 +2,12 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { Button } from '../'
+import { useCart } from '../../hooks/CardContext'
 import formatCurrency from '../../utils/formatCurrency'
 import { Container, Image, ProductName, ProductPrice } from './style'
 
 export function CardProduct({ product }) {
+  const { putProductsInCart } = useCart()
   return (
     <Container>
       <Image src={product.url} />
@@ -15,7 +17,7 @@ export function CardProduct({ product }) {
 
         <div>
           <ProductPrice>{formatCurrency(product.price)}</ProductPrice>
-          <Button>Adicionar</Button>
+          <Button onClick={() => putProductsInCart(product)}>Adicionar</Button>
         </div>
       </div>
     </Container>
