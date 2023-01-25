@@ -44,3 +44,23 @@ export const EmptyCart = styled.p`
   font-weight: bold;
   text-align: center;
 `
+
+export const QuantityContainer = styled.div`
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+
+  button {
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+  }
+
+  p {
+    font-size: 16px;
+    color: #000;
+    margin-top: 5px;
+  }
+`
