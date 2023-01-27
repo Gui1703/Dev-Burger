@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import ProductLogo from '../../assets/product-logo.svg'
 import { CardProduct } from '../../components'
@@ -12,10 +13,11 @@ import {
 } from './styles'
 
 export function Products() {
+  const { state } = useLocation()
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
-  const [activeCategory, setActiveCategory] = useState(0)
+  const [activeCategory, setActiveCategory] = useState(state?.categoryId ?? 0)
 
   useEffect(() => {
     async function loadCategories() {
