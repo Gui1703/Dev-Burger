@@ -18,10 +18,11 @@ export const ContainerLeft = styled.div`
 
 export const PageLink = styled.a`
   text-decoration: none;
-  color: #555555;
+  color: ${props => (props.isActive ? '#9758A6' : '#555555')};
   cursor: pointer;
   font-size: 16px;
   line-height: 19px;
+  font-weight: ${props => (props.isActive ? 'bold' : 'normal')};
 `
 
 export const PageLinkExit = styled.a`
