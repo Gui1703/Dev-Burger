@@ -3,16 +3,15 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 
 import { Header } from '../components/Header'
-import { useUser } from '../hooks/UserContext'
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const { userData } = useUser()
+  const user = JSON.parse(localStorage.getItem('codeburger:userData'))
 
-  if (!userData) {
+  if (!user) {
     return <Navigate to="/login" />
   }
 
-  if (!userData.admin && rest.isAdmin) {
+  if (!user.admin && rest.isAdmin) {
     return <Navigate to="/" />
   }
 
