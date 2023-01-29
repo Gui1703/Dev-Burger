@@ -1,13 +1,11 @@
 import React from 'react'
 
-import Orders from './Orders'
 import { Container } from './styles'
 
-export function Admin() {
+export default function Orders() {
   return (
     <Container>
       <h1>Hello World</h1>
-      <Orders />
     </Container>
   )
 }
