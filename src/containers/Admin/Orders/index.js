@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow'
 import React, { useEffect, useState } from 'react'
 
 import api from '../../../services/api'
+import { formatDate } from '../../../utils/formatDate'
 import status from './order-status'
 import Row from './row'
 import { Container, Menu, LinkMenu } from './styles'
@@ -32,7 +33,7 @@ function Orders() {
     return {
       name: order.user.name,
       orderId: order._id,
-      date: order.createdAt,
+      date: formatDate(order.createdAt),
       status: order.status,
       products: order.products,
       price: order.price
@@ -54,7 +55,7 @@ function Orders() {
       )
       setFilteredOrders(newFilteredOrders)
     }
-  }, [orders])
+  }, [activeStatus, orders])
 
   function handleStatus(status) {
     if (status.id === 1) {
