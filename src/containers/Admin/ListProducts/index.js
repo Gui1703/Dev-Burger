@@ -16,8 +16,6 @@ import { Container, IconEdit } from './styles'
 export default function ListProducts() {
   const [products, setProducts] = useState([])
 
-  console.log(products)
-
   useEffect(() => {
     async function loadProducts() {
       const { data } = await api.get('products')

@@ -21,10 +21,6 @@ export default function myRoutes() {
           path="/admin"
           element={<PrivateRoute component={Admin} isAdmin />}
         />
-        <Route
-          path="/admin/products"
-          element={<PrivateRoute component={Admin} isAdmin />}
-        />
       </Routes>
     </Router>
   )

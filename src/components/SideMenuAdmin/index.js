@@ -15,7 +15,9 @@ export function SideMenuAdmin() {
       {listLinks.map(item => (
         <ItemContainer key={item.id} isActive={true}>
           <img src={item.icon} />
-          <ListLink to={item.link}>{item.label}</ListLink>
+          <ListLink to="/admin" state={{ slug: item.link }}>
+            {item.label}
+          </ListLink>
         </ItemContainer>
       ))}
 
