@@ -8,7 +8,6 @@ import { Container } from './styles'
 
 export function Admin() {
   const location = useLocation()
-  console.log(location)
 
   const mountComponents = () => {
     if (location.pathname === '/admin' && location.state === null) {
