@@ -11,7 +11,6 @@ export const CartProvider = ({ children }) => {
   }
 
   const putProductsInCart = async product => {
-    console.log(product)
     const cartIndex = cartProducts.findIndex(prd => prd.id === product.id)
 
     let newCartProducts = {}
