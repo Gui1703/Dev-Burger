@@ -1,3 +1,4 @@
+import ReactSelect from 'react-select'
 import styled from 'styled-components'
 
 import { Button } from '../../../components'
@@ -59,5 +60,12 @@ export const LabelUpload = styled.label`
   input {
     opacity: 0;
     display: none;
+  }
+`
+export const Select = styled(ReactSelect)`
+  width: 100%;
+
+  .css-1s2u09g-control {
+    cursor: pointer;
   }
 `
