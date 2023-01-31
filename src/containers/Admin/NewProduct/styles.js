@@ -16,6 +16,7 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 23px;
+    width: 417px;
   }
 `
 
@@ -37,4 +38,26 @@ export const ButtonForm = styled(Button)`
   width: 100%;
   height: 48px;
   margin-top: 80px;
+`
+export const LabelUpload = styled.label`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px dashed #fff;
+  background: transparent;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  height: 50px;
+  padding-left: 21px;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #fff;
+  gap: 10px;
+
+  input {
+    opacity: 0;
+    display: none;
+  }
 `
