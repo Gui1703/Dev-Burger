@@ -11,6 +11,7 @@ import { ButtonForm, Container, Input, LabelUpload, Select } from './styles'
 export default function NewProduct() {
   const [fileName, setFileName] = useState('')
   const [file, setFile] = useState()
+  const [fileError, setFileError] = useState(false)
   const [categories, setCategories] = useState([])
 
   const schema = yup
@@ -31,6 +32,7 @@ export default function NewProduct() {
   })
 
   const submit = data => {
+    if (!file) return setFileError(true)
     console.log(data)
     console.log(file)
   }
@@ -72,7 +74,9 @@ export default function NewProduct() {
             onChange={value => handleFile(value)}
           />
         </LabelUpload>
-        <ErrorMessage>{file ? '' : 'O campo é obrigatório'}</ErrorMessage>
+        <ErrorMessage>
+          {fileError && !file ? 'O campo é obrigatório' : ''}
+        </ErrorMessage>
 
         <Controller
           name="category_id"
