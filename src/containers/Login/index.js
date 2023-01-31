@@ -7,7 +7,7 @@ import * as yup from 'yup'
 
 import LoginImg from '../../assets/login-image.svg'
 import Logo from '../../assets/logo.svg'
-import { Button } from '../../components'
+import { Button, ErrorMessage } from '../../components'
 import { useUser } from '../../hooks/UserContext'
 import api from '../../services/api'
 import {
@@ -16,8 +16,7 @@ import {
   ContainerItems,
   Input,
   Label,
-  SignInLink,
-  Error
+  SignInLink
 } from './styles'
 
 export function Login() {
@@ -82,7 +81,7 @@ export function Login() {
             {...register('email')}
             error={errors.email?.message}
           />
-          <Error>{errors.email?.message}</Error>
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
           <Label>Senha</Label>
           <Input
@@ -90,7 +89,7 @@ export function Login() {
             {...register('password')}
             error={errors.password?.message}
           />
-          <Error>{errors.password?.message}</Error>
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
           <Button type="submit" style={{ marginTop: 20, marginBottom: 20 }}>
             Login

@@ -1,16 +1,39 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
+import { ErrorMessage } from '../../../components'
 import api from '../../../services/api'
 import { ButtonForm, Container, Input, LabelUpload, Select } from './styles'
 
 export default function NewProduct() {
-  const [fileName, setFileName] = useState(null)
+  const [fileName, setFileName] = useState('')
+  const [file, setFile] = useState()
   const [categories, setCategories] = useState([])
-  const { register, handleSubmit, control } = useForm()
 
-  const submit = data => console.log(data)
+  const schema = yup
+    .object({
+      productName: yup.string().required('O campo é obrigatório'),
+      price: yup.string().required('O campo é obrigatório'),
+      category_id: yup.object().required('O campo é obrigatório')
+    })
+    .required()
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors }
+  } = useForm({
+    resolver: yupResolver(schema)
+  })
+
+  const submit = data => {
+    console.log(data)
+    console.log(file)
+  }
 
   useEffect(() => {
     async function loadCategories() {
@@ -21,12 +44,19 @@ export default function NewProduct() {
     loadCategories()
   }, [])
 
+  const handleFile = value => {
+    setFile(value.target.files[0])
+    setFileName(value.target.files[0]?.name)
+  }
+
   return (
     <Container>
       <form noValidate onSubmit={handleSubmit(submit)}>
         <Input placeholder="Nome" type="text" {...register('productName')} />
+        <ErrorMessage>{errors.productName?.message}</ErrorMessage>
 
         <Input placeholder="Preço" type="number" {...register('price')} />
+        <ErrorMessage>{errors.price?.message}</ErrorMessage>
 
         <LabelUpload htmlFor="image-input">
           {fileName || (
@@ -39,10 +69,10 @@ export default function NewProduct() {
             type="file"
             id="image-input"
             accept="image/png, image/jpeg"
-            {...register('image')}
-            onChange={value => setFileName(value.target.files[0]?.name)}
+            onChange={value => handleFile(value)}
           />
         </LabelUpload>
+        <ErrorMessage>{file ? '' : 'O campo é obrigatório'}</ErrorMessage>
 
         <Controller
           name="category_id"
@@ -59,6 +89,7 @@ export default function NewProduct() {
             )
           }}
         ></Controller>
+        <ErrorMessage>{errors.category_id?.message}</ErrorMessage>
 
         <ButtonForm>Adicionar Produto</ButtonForm>
       </form>
