@@ -5,4 +5,15 @@ const paths = {
   newProduct: 'new-product'
 }
 
+export const trueOrFalse = [
+  {
+    value: true,
+    name: 'Sim'
+  },
+  {
+    value: false,
+    name: 'Não'
+  }
+]
+
 export default paths
