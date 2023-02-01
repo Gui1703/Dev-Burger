@@ -13,7 +13,7 @@ import status from './order-status'
 import Row from './row'
 import { Container, Menu, LinkMenu } from './styles'
 
-function Orders() {
+export default function Orders() {
   const [orders, setOrders] = useState([])
   const [filteredOrders, setFilteredOrders] = useState([])
   const [activeStatus, setActiveStatus] = useState(1)
@@ -109,5 +109,3 @@ function Orders() {
     </Container>
   )
 }
-
-export default Orders

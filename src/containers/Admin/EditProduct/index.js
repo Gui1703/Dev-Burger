@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
 import React, { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import * as yup from 'yup'
 
@@ -10,11 +11,15 @@ import { trueOrFalse } from '../../../constants/paths'
 import api from '../../../services/api'
 import { ButtonForm, Container, Input, LabelUpload, Select } from './styles'
 
-export default function NewProduct() {
+export default function EditProduct() {
+  const navigate = useNavigate()
   const [fileName, setFileName] = useState('')
   const [file, setFile] = useState()
   const [fileError, setFileError] = useState(false)
   const [categories, setCategories] = useState([])
+  const { state } = useLocation()
+
+  console.log(state)
 
   const schema = yup
     .object({
@@ -36,6 +41,7 @@ export default function NewProduct() {
 
   const submit = async data => {
     if (!file) return setFileError(true)
+    console.log(data)
     const formData = new FormData()
 
     formData.append('name', data.productName)
@@ -49,6 +55,11 @@ export default function NewProduct() {
       success: 'Produto cadastrado com sucesso',
       error: 'Falha ao tentar cadastrar o seu produto, tente novamente'
     })
+
+    console.log(file)
+    setTimeout(() => {
+      navigate('/admin/products')
+    }, 2000)
   }
 
   useEffect(() => {
@@ -126,7 +137,7 @@ export default function NewProduct() {
         ></Controller>
         <ErrorMessage>{errors.category_id?.message}</ErrorMessage>
 
-        <ButtonForm>Adicionar Produto</ButtonForm>
+        <ButtonForm>Editar Produto</ButtonForm>
       </form>
     </Container>
   )

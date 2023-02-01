@@ -1,8 +1,8 @@
 const paths = {
-  order: 'order',
-  products: 'products-admin',
-  editProduct: 'edit-product',
-  newProduct: 'new-product'
+  order: 'orders',
+  products: 'products',
+  newProduct: 'new-product',
+  editProduct: 'edit-product'
 }
 
 export const trueOrFalse = [

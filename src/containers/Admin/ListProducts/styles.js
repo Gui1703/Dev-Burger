@@ -2,7 +2,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: max-content;
+  width: 50%;
 
   img {
     width: 60px;

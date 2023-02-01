@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import api from '../../../services/api'
 import formatCurrency from '../../../utils/formatCurrency'
@@ -15,6 +16,7 @@ import { Container, IconEdit } from './styles'
 
 export default function ListProducts() {
   const [products, setProducts] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function loadProducts() {
@@ -24,6 +26,11 @@ export default function ListProducts() {
     }
     loadProducts()
   }, [])
+
+  const handleRedirect = product => {
+    navigate('/admin/edit-product', { state: product })
+  }
+
   return (
     <Container>
       <TableContainer component={Paper}>
@@ -59,7 +66,7 @@ export default function ListProducts() {
                     <img src={product.url} alt="imagem do produto" />
                   </TableCell>
                   <TableCell>
-                    <IconEdit />
+                    <IconEdit onClick={() => handleRedirect(product)} />
                   </TableCell>
                 </TableRow>
               ))}

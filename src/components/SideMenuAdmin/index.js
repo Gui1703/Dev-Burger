@@ -16,7 +16,7 @@ export function SideMenuAdmin() {
       {listLinks.map(item => (
         <ItemContainer
           key={item.id}
-          isActive={location?.state?.slug === item.link}
+          isActive={location.pathname === `/admin/${item.link}`}
           style={
             location.pathname === '/admin' &&
             location.state === null &&
@@ -26,9 +26,7 @@ export function SideMenuAdmin() {
           }
         >
           <img src={item.icon} />
-          <ListLink to="/admin" state={{ slug: item.link }}>
-            {item.label}
-          </ListLink>
+          <ListLink to={`/admin/${item.link}`}>{item.label}</ListLink>
         </ItemContainer>
       ))}
 
