@@ -13,11 +13,11 @@ import { ButtonForm, Container, Input, LabelUpload, Select } from './styles'
 
 export default function EditProduct() {
   const navigate = useNavigate()
-  const [fileName, setFileName] = useState('')
-  const [file, setFile] = useState()
+  const { state } = useLocation()
+  const [fileName, setFileName] = useState(state?.url ?? '')
+  const [file, setFile] = useState(state?.url ?? null)
   const [fileError, setFileError] = useState(false)
   const [categories, setCategories] = useState([])
-  const { state } = useLocation()
 
   console.log(state)
 
@@ -41,7 +41,7 @@ export default function EditProduct() {
 
   const submit = async data => {
     if (!file) return setFileError(true)
-    console.log(data)
+
     const formData = new FormData()
 
     formData.append('name', data.productName)
@@ -50,13 +50,12 @@ export default function EditProduct() {
     formData.append('offer', data.offer.value)
     formData.append('file', file)
 
-    await toast.promise(api.post('products', formData), {
-      pending: 'Cadastrando produto...',
-      success: 'Produto cadastrado com sucesso',
-      error: 'Falha ao tentar cadastrar o seu produto, tente novamente'
+    await toast.promise(api.put(`products/${state.id}`, formData), {
+      pending: 'Editando produto...',
+      success: 'Produto editado com sucesso',
+      error: 'Falha ao tentar editar o seu produto, tente novamente'
     })
 
-    console.log(file)
     setTimeout(() => {
       navigate('/admin/products')
     }, 2000)
@@ -79,10 +78,20 @@ export default function EditProduct() {
   return (
     <Container>
       <form noValidate onSubmit={handleSubmit(submit)}>
-        <Input placeholder="Nome" type="text" {...register('productName')} />
+        <Input
+          placeholder="Nome"
+          type="text"
+          defaultValue={state.name}
+          {...register('productName')}
+        />
         <ErrorMessage>{errors.productName?.message}</ErrorMessage>
 
-        <Input placeholder="Preço" type="number" {...register('price')} />
+        <Input
+          placeholder="Preço"
+          type="number"
+          defaultValue={state.price}
+          {...register('price')}
+        />
         <ErrorMessage>{errors.price?.message}</ErrorMessage>
 
         <LabelUpload htmlFor="image-input">
@@ -105,6 +114,11 @@ export default function EditProduct() {
 
         <Controller
           name="offer"
+          defaultValue={
+            state.offer
+              ? { name: 'Sim', value: true }
+              : { name: 'Não', value: false }
+          }
           control={control}
           render={({ field }) => {
             return (
@@ -114,6 +128,11 @@ export default function EditProduct() {
                 getOptionLabel={cat => cat.name}
                 getOptionValue={cat => cat.value}
                 placeholder="Oferta"
+                defaultValue={
+                  state.offer
+                    ? { name: 'Sim', value: true }
+                    : { name: 'Não', value: false }
+                }
               />
             )
           }}
@@ -123,6 +142,7 @@ export default function EditProduct() {
         <Controller
           name="category_id"
           control={control}
+          defaultValue={state.category}
           render={({ field }) => {
             return (
               <Select
@@ -131,6 +151,7 @@ export default function EditProduct() {
                 getOptionLabel={cat => cat.name}
                 getOptionValue={cat => cat.id}
                 placeholder="Categorias"
+                defaultValue={state.category}
               />
             )
           }}
